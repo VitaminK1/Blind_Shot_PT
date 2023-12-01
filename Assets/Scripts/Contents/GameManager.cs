@@ -1,5 +1,19 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+
+[Serializable]
+public class EnemyTypeCount
+{
+    public Define.EnemyType Type;
+    public int Count;
+}
+
+[Serializable]
+public class EnemySettings
+{
+    public List<EnemyTypeCount> EnemyTypeCounts = new List<EnemyTypeCount>();
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -7,27 +21,21 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => _instance;
     
     [Header("Wave Settings")]
-    [SerializeField] protected int _wave = 0;
-    public int Wave
-    {
-        get { return _wave; }
-        set { _wave = Mathf.Max(0, value); }
-    
-    }
-    
-    [Header("Player")]
-    [SerializeField] private GameObject m_Player;
-    public GameObject Player => m_Player;
-    
-    private Define.GameState m_CurrentGameState = Define.GameState.None;
+    [SerializeField] protected List<EnemySettings> _enemyWaveSettings = new List<EnemySettings>();
+    public List<EnemySettings> EnemyWaveSettings => _enemyWaveSettings;
+
+    protected int _currentWave = 0;
+    public int CurrentWave => _currentWave;
+
+    private Define.GameState _currentGameState = Define.GameState.None;
     public Define.GameState CurrentGameState
     {
-        get { return m_CurrentGameState; }
+        get { return _currentGameState; }
         set
         {
-            if (m_CurrentGameState != value) return;
+            if (_currentGameState != value) return;
             
-            m_CurrentGameState = value;
+            _currentGameState = value;
             OnGameStateChanged();
         }
     }
@@ -39,9 +47,19 @@ public class GameManager : MonoBehaviour
         ChangeGameState(Define.GameState.InGame);
     }
 
-    private void ChangeGameState(Define.GameState gameState)
+    public void ChangeGameState(Define.GameState gameState)
     {
+        if (gameState == Define.GameState.InGame)
+        {
+            _currentWave = 0;
+        }
+        
         CurrentGameState = gameState;
+    }
+    
+    public void ProceedWave()
+    {
+        _currentWave++;
     }
 
     private void OnGameStateChanged()

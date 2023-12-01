@@ -6,8 +6,12 @@ public class AttackBehaviour : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy")) {
-            Managers.enemy.Despawn(other.gameObject);
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            if (other.gameObject.TryGetComponent(out BaseMonsterController monster))
+            {
+                monster.AttackedByPlayer();
+            }
         }
     }
 }

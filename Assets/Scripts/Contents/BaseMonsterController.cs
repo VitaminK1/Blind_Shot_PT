@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class BaseMonsterController : MonoBehaviour
 {
+	[SerializeField] protected int _damage;
 	[SerializeField] protected Animator _animator;
-	[SerializeField] protected Vector3 _destPos;
 	[SerializeField] protected Define.EnemyState _enemyState = Define.EnemyState.None;
 	
-	protected GameObject _lockTarget => GameManager.Instance.Player;
+	protected GameObject _lockTarget => Player.Instance.gameObject;
 	protected readonly int _movingId = Animator.StringToHash("Moving");
 	protected readonly int _attackId = Animator.StringToHash("Attack");
 	protected readonly int _dieId = Animator.StringToHash("Die");
@@ -30,16 +28,12 @@ public abstract class BaseMonsterController : MonoBehaviour
 		switch (enemyState)
 		{
 			case Define.EnemyState.None:
-				ChangeEnemyState(Define.EnemyState.Moving);
 				break;
 			case Define.EnemyState.Die:
 				UpdateDie();
 				break;
 			case Define.EnemyState.Moving:
 				UpdateMoving();
-				break;
-			case Define.EnemyState.Idle:
-				UpdateIdle();
 				break;
 			case Define.EnemyState.Attack:
 				UpdateAttack();
@@ -52,9 +46,18 @@ public abstract class BaseMonsterController : MonoBehaviour
 		enemyState = state;
 	}
 
+	protected virtual void Start()
+	{
+		Init();
+	}
+
+	protected virtual void Init()
+	{
+		ChangeEnemyState(Define.EnemyState.Moving);
+	}
+
 	protected virtual void UpdateDie() { }
 	protected virtual void UpdateMoving() { }
-	protected virtual void UpdateIdle() { }
 	protected virtual void UpdateAttack() { }
 
 	protected virtual void OnEnemyStateChanged(Define.EnemyState newState)
@@ -71,6 +74,26 @@ public abstract class BaseMonsterController : MonoBehaviour
 				_animator.SetBool(_attackId, true);
 				break;
 		}
+	}
+
+	public void AttackPlayer()
+	{
+		Player.Instance.Hit(_damage);
+	}
+
+	public void AttackedByPlayer()
+	{
+		ChangeEnemyState(Define.EnemyState.Die);
+	}
+
+	public void Despawn()
+	{
+		
+	}
+
+	protected void OnDestroy()
+	{
+		EnemySpawningPool.Instance.OnEnemyDespawn(this);
 	}
 }
 

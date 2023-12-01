@@ -8,23 +8,28 @@ public class WalkingMonsterMonsterController : BaseMonsterController
 	[SerializeField] float _attackRange = 1;
 	[SerializeField] NavMeshAgent _nma;
 
+	protected override void Init()
+	{
+		base.Init();
+		SetDestination(_lockTarget.transform.position);
+	}
+	
 	protected override void UpdateMoving()
 	{
-		// 플레이어가 내 사정거리보다 가까우면 공격
+		// 플레이어가 내 사정거리보다 가까우면 공격 상태로 전환
 		if (_lockTarget != null)
 		{
-			_destPos = _lockTarget.transform.position;
-			float distance = (_destPos - transform.position).magnitude;
+			float distance = (_lockTarget.transform.position - transform.position).magnitude;
 			if (distance <= _attackRange)
 			{
-				SetDestination(transform.position);
-				enemyState = Define.EnemyState.Attack;
+				_nma.ResetPath();
+				ChangeEnemyState(Define.EnemyState.Attack);
 				return;
 			}
 		}
 
 		// 이동
-		Vector3 dir = _destPos - transform.position;
+		Vector3 dir = _lockTarget.transform.position - transform.position;
 		dir.y = 0;
 		if (dir.magnitude < 0.1f)
 		{
@@ -32,7 +37,6 @@ public class WalkingMonsterMonsterController : BaseMonsterController
 		}
 		else
 		{
-			SetDestination(_destPos);
 
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
 		}
@@ -48,13 +52,6 @@ public class WalkingMonsterMonsterController : BaseMonsterController
 			transform.rotation = Quaternion.Lerp(transform.rotation, quat, 20 * Time.deltaTime);
 		}
 	}
-
-    void OnCollisionEnter(Collision collision)
-    {
-		if (collision.gameObject.CompareTag("Player")) {
-			// Managers.Scene.LoadScene(Define.Scene.GameOverScene);
-		}
-    }
 
     private void SetDestination(Vector3 destPos) 
     {

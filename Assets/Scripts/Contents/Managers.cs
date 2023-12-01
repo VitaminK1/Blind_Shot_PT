@@ -14,9 +14,6 @@ public class Managers
     PoolManager _pool = new PoolManager();
     public static PoolManager Pool { get { return Instance._pool; } }
 
-    EnemyManager m_Enemy = new EnemyManager();
-    public static EnemyManager enemy { get { return Instance.m_Enemy; } }
-
     void Start()
     {
         Init();
