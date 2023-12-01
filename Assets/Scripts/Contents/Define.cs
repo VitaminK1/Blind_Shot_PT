@@ -13,13 +13,11 @@ public class Define
 
     }
 
-    public enum Scene { 
-        Unknown,
-        TutorialScene,
-        InGameScene,
-        GameOverScene,
-        EndingScene,
-
+    public enum GameState {
+        None,
+        InGame,
+        GameOver,
+        Ending,
     }
 
     public enum Sound {
@@ -30,10 +28,9 @@ public class Define
     }
 
     public enum EnemyType { 
-        A,
-        B,
+        Flying,
+        Walking,
         C,
-    
     }
 
     public enum State

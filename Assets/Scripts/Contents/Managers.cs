@@ -16,11 +16,12 @@ public class Managers
     SceneManagerEx _scene = new SceneManagerEx();
     public static SceneManagerEx Scene { get { return Instance._scene; } }
 
-    GameManagerEx _game = new GameManagerEx();
-    public static GameManagerEx Game { get { return Instance._game; } }
+    EnemyManager m_Enemy = new EnemyManager();
+    public static EnemyManager enemy { get { return Instance.m_Enemy; } }
 
     SoundManager _sound = new SoundManager();
     public static SoundManager Sound { get { return Instance._sound; } }
+
     void Start()
     {
         Init();

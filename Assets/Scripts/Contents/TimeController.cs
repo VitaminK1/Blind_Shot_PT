@@ -85,7 +85,7 @@ public class TimeController: MonoBehaviour
         }
         if (currentTime.Hour > (int)sunriseHour)
         {
-            Managers.Scene.LoadScene(Define.Scene.EndingScene);
+            // Managers.Scene.LoadScene(Define.Scene.EndingScene);
         }
     }
 

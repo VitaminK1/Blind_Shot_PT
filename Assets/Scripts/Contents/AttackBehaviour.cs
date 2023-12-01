@@ -7,7 +7,7 @@ public class AttackBehaviour : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy")) {
-            Managers.Game.Despawn(other.gameObject);
+            Managers.enemy.Despawn(other.gameObject);
         }
     }
 }

@@ -3,35 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManagerEx
+public class EnemyManager : MonoBehaviour
 {
-    GameObject _player;
-
-    public GameObject Player {
-        get { return _player; }
-        set { _player = value; }
-    }
+    [SerializeField] private GameObject m_FlyingEnemy;
+    [SerializeField] private GameObject m_WalkingEnemy;
+    
     HashSet<GameObject> _monsters = new HashSet<GameObject>();
 
     public Action<int> OnSpawnEvent;
 
-    public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
+    public GameObject SpawnEnemy(Define.EnemyType enemyType, Vector3 position, Quaternion rotation, Transform parent = null)
     {
-        GameObject go = Managers.Resource.Instantiate(path, parent);
-
-        switch (type)
+        GameObject obj = null;
+        
+        switch (enemyType)
         {
-            case Define.WorldObject.Enemy:
-                _monsters.Add(go);
+            case Define.EnemyType.Flying:
+                obj = Instantiate(m_FlyingEnemy, position, rotation);
+                _monsters.Add(obj);
                 if (OnSpawnEvent != null)
                     OnSpawnEvent.Invoke(1);
-                break;
-            case Define.WorldObject.Player:
-                _player = go;
-                break;
+                return obj;
+            case Define.EnemyType.Walking:
+                obj = Instantiate(m_WalkingEnemy, position, rotation);
+                _monsters.Add(obj);
+                if (OnSpawnEvent != null)
+                    OnSpawnEvent.Invoke(1);
+                return obj;
         }
 
-        return go;
+        return obj;
     }
 
     public Define.WorldObject GetWorldObjectType(GameObject go)
@@ -55,12 +56,6 @@ public class GameManagerEx
                         if (OnSpawnEvent != null)
                             OnSpawnEvent.Invoke(-1);
                     }
-                }
-                break;
-            case Define.WorldObject.Player:
-                {
-                    if (_player == go)
-                        _player = null;
                 }
                 break;
         }

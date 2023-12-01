@@ -25,11 +25,27 @@ public class SpawningPool : MonoBehaviour
     public void AddMonsterCount(int value) { _monsterCount += value; }
     public void SetKeepMonsterCount(int count) { _keepMonsterCount = count; }
 
+    private void Awake()
+    {
+        GameManager.Instance.OnGameStateChangedAction += OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(Define.GameState gameState)
+    {
+        switch (gameState)
+        {
+            case Define.GameState.InGame:
+                //
+                break;
+            
+        }
+    }
+
     void Start()
     {
         _spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawn");
-        Managers.Game.OnSpawnEvent -= AddMonsterCount;
-        Managers.Game.OnSpawnEvent += AddMonsterCount;
+        Managers.enemy.OnSpawnEvent -= AddMonsterCount;
+        Managers.enemy.OnSpawnEvent += AddMonsterCount;
     }
 
     void Update()
@@ -45,7 +61,7 @@ public class SpawningPool : MonoBehaviour
         _reserveCount++;
         isSpawning = true;
         yield return new WaitForSeconds(_spawnTime);
-        GameObject obj = Managers.Game.Spawn(Define.WorldObject.Enemy, "Enemy");
+        GameObject obj = Managers.enemy.SpawnEnemy(Define.EnemyType.Walking, Vector3.zero, Quaternion.identity);
         NavMeshAgent nma = obj.GetOrAddComponent<NavMeshAgent>();
         if (_spawnPoints.Length < 1)
         {

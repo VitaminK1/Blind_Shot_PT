@@ -16,7 +16,7 @@ public class MonsterController : BaseController
 
 	protected override void UpdateIdle()
 	{
-		GameObject player = Managers.Game.Player;
+		GameObject player = GameManager.Instance.Player;;
 		if (player == null)
 			return;
 		_lockTarget = player;
@@ -26,7 +26,7 @@ public class MonsterController : BaseController
 
 	protected override void UpdateMoving()
 	{
-		// ÇÃ·¹ÀÌ¾î°¡ ³» »çÁ¤°Å¸®º¸´Ù °¡±î¿ì¸é °ø°İ
+		// í”Œë ˆì´ì–´ê°€ ë‚´ ì‚¬ì •ê±°ë¦¬ë³´ë‹¤ ê°€ê¹Œìš°ë©´ ê³µê²©
 		if (_lockTarget != null)
 		{
 			_destPos = _lockTarget.transform.position;
@@ -40,7 +40,7 @@ public class MonsterController : BaseController
 			}
 		}
 
-		// ÀÌµ¿
+		// ì´ë™
 		Vector3 dir = _destPos - transform.position;
 		dir.y = 0;
 		if (dir.magnitude < 0.1f)
@@ -70,7 +70,7 @@ public class MonsterController : BaseController
     void OnCollisionEnter(Collision collision)
     {
 		if (collision.gameObject.CompareTag("Player")) {
-			Managers.Scene.LoadScene(Define.Scene.GameOverScene);
+			// Managers.Scene.LoadScene(Define.Scene.GameOverScene);
 		}
     }
 
