@@ -15,11 +15,8 @@ public class EnemySettings
     public List<EnemyTypeCount> EnemyTypeCounts = new List<EnemyTypeCount>();
 }
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    static GameManager _instance;
-    public static GameManager Instance => _instance;
-    
     [Header("Wave Settings")]
     [SerializeField] protected List<EnemySettings> _enemyWaveSettings = new List<EnemySettings>();
     public List<EnemySettings> EnemyWaveSettings => _enemyWaveSettings;
@@ -33,7 +30,7 @@ public class GameManager : MonoBehaviour
         get { return _currentGameState; }
         set
         {
-            if (_currentGameState != value) return;
+            if (_currentGameState == value) return;
             
             _currentGameState = value;
             OnGameStateChanged();

@@ -5,12 +5,9 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemySpawningPool : MonoBehaviour
+public class EnemySpawningPool : Singleton<EnemySpawningPool>
 {
-    static EnemySpawningPool _instance;
-    public static EnemySpawningPool Instance => _instance;
-
-    [SerializeField] private GameObject[] _spawnPoints;
+    [SerializeField] private Transform[] _spawnPoints;
 
     [SerializeField] private BaseMonsterController _flyingEnemy;
     [SerializeField] private BaseMonsterController _walkingEnemy;
@@ -23,8 +20,9 @@ public class EnemySpawningPool : MonoBehaviour
     private CancellationTokenSource _cancellationTokenSource;
     private Vector3 _spawnPos;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         GameManager.OnGameStateChangedAction += OnGameStateChanged;
     }
 
@@ -130,6 +128,7 @@ public class EnemySpawningPool : MonoBehaviour
         BaseMonsterController monster = InstantiateEnemy(enemyType, spawnPosition, spawnRotation);
         _monsters.Add(monster);
 
+        Debug.Log("spawned enemy");
         return monster;
     }
 
@@ -141,8 +140,8 @@ public class EnemySpawningPool : MonoBehaviour
         }
         else
         {
-            GameObject spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length - 1)];
-            return spawnPoint.transform.position + new Vector3(0, _spawnHeight, 0);
+            Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length - 1)];
+            return spawnPoint.position + new Vector3(0, _spawnHeight, 0);
         }
     }
 

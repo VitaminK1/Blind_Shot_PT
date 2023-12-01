@@ -65,13 +65,13 @@ public abstract class BaseMonsterController : MonoBehaviour
 		switch (newState)
 		{
 			case Define.EnemyState.Die:
-				_animator.SetBool(_dieId, true);
+				//_animator.SetBool(_dieId, true);
 				break;
 			case Define.EnemyState.Moving:
-				_animator.SetBool(_movingId, true);
+				//_animator.SetBool(_movingId, true);
 				break;
 			case Define.EnemyState.Attack:
-				_animator.SetBool(_attackId, true);
+				//_animator.SetBool(_attackId, true);
 				break;
 		}
 	}

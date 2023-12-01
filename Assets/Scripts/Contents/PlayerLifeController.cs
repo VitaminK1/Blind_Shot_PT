@@ -27,6 +27,10 @@ public class PlayerLifeController : MonoBehaviour
     private void Awake()
     {
         GameManager.OnGameStateChangedAction += OnGameStateChanged;
+    }
+
+    private void Start()
+    {
         Player.Instance.OnHit += DecreaseHealth;
     }
 

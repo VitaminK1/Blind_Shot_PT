@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -58,22 +56,37 @@ public class TimeController: MonoBehaviour
     private TimeSpan sunsetTime;
 
     public static readonly WaitForSeconds m_waitForSecond10s = new WaitForSeconds(10f);
+    
     public void Awake()
     {
-        currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
-        sunriseTime = TimeSpan.FromHours(sunriseHour);
-        sunsetTime = TimeSpan.FromHours(sunsetHour);
-
+        GameManager.OnGameStateChangedAction += OnGameStateChanged;
     }
 
     public void Update()
     {
-        UpdateTimeOfDay();
-        RotateSun();
-        UpdateLightSettings();
-        
+        if (GameManager.Instance.CurrentGameState == Define.GameState.InGame)
+        {
+            UpdateTimeOfDay();
+            RotateSun();
+            UpdateLightSettings();
+        }
     }
-
+    
+    private void InitializeTime()
+    {
+        currentTime = DateTime.Now.Date + TimeSpan.FromHours(startHour);
+        sunriseTime = TimeSpan.FromHours(sunriseHour);
+        sunsetTime = TimeSpan.FromHours(sunsetHour);
+    }
+    
+    private void OnGameStateChanged(Define.GameState newGameState)
+    {
+        if (newGameState == Define.GameState.InGame)
+        {
+            InitializeTime();
+            GameManager.OnGameStateChangedAction -= OnGameStateChanged;
+        }
+    }
 
     void UpdateTimeOfDay()
     {
@@ -85,7 +98,7 @@ public class TimeController: MonoBehaviour
         }
         if (currentTime.Hour > (int)sunriseHour)
         {
-            // Managers.Scene.LoadScene(Define.Scene.EndingScene);
+            GameManager.Instance.ChangeGameState(Define.GameState.Ending);
         }
     }
 
@@ -122,7 +135,6 @@ public class TimeController: MonoBehaviour
         sunLight.intensity = Mathf.Lerp(0, maxSunLightIntensity, lightChangeCurve.Evaluate(dotProduct));
         moonLight.intensity = Mathf.Lerp(maxMoonLightIntensity, 0, lightChangeCurve.Evaluate(dotProduct));
         RenderSettings.fogDensity = Mathf.Lerp(minFogDensity, maxFogDensity, fogDensityChangeCurve.Evaluate(-dotProduct));
-        Debug.Log(RenderSettings.fogDensity);
         RenderSettings.ambientLight = Color.Lerp(nightAmbientLight, dayAmbientLight, lightChangeCurve.Evaluate(dotProduct));
     }
 

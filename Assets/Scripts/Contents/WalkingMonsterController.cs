@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WalkingMonsterMonsterController : BaseMonsterController
+public class WalkingMonsterController : BaseMonsterController
 {
 	[SerializeField] float _attackRange = 1;
 	[SerializeField] NavMeshAgent _nma;
@@ -22,7 +22,7 @@ public class WalkingMonsterMonsterController : BaseMonsterController
 			float distance = (_lockTarget.transform.position - transform.position).magnitude;
 			if (distance <= _attackRange)
 			{
-				_nma.ResetPath();
+				SetDestination(transform.position);
 				ChangeEnemyState(Define.EnemyState.Attack);
 				return;
 			}

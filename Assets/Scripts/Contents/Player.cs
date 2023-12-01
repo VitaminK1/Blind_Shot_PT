@@ -1,13 +1,10 @@
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
-    static Player _instance;
-    public static Player Instance => _instance;
-    
     [SerializeField] private PlayerLifeController m_LifeController;
-
+    
     public event Action<int> OnHit;
 
     public void Hit(int damage)
