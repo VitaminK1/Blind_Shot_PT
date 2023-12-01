@@ -13,14 +13,9 @@ public class Managers
 
     PoolManager _pool = new PoolManager();
     public static PoolManager Pool { get { return Instance._pool; } }
-    SceneManagerEx _scene = new SceneManagerEx();
-    public static SceneManagerEx Scene { get { return Instance._scene; } }
 
     EnemyManager m_Enemy = new EnemyManager();
     public static EnemyManager enemy { get { return Instance.m_Enemy; } }
-
-    SoundManager _sound = new SoundManager();
-    public static SoundManager Sound { get { return Instance._sound; } }
 
     void Start()
     {
@@ -41,12 +36,10 @@ public class Managers
             DontDestroyOnLoad(go);
             _instance = go.GetComponent<Managers>();
             _instance._pool.Init();
-            _instance._sound.Init();
         }
     }
     public static void Clear() {
         Pool.Clear();
-        Sound.Clear();
         return;
     }
 }

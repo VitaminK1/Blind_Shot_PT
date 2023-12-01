@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    static GameManager _instance;
+    public static GameManager Instance => _instance;
+    
     [Header("Wave Settings")]
     [SerializeField] protected int _wave = 0;
     public int Wave
@@ -15,9 +18,6 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] private GameObject m_Player;
     public GameObject Player => m_Player;
-    
-    static GameManager _instance;
-    public static GameManager Instance => _instance;
     
     private Define.GameState m_CurrentGameState = Define.GameState.None;
     public Define.GameState CurrentGameState
@@ -32,12 +32,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public event Action<Define.GameState> OnGameStateChangedAction;
-    public event Action OnInGameStart;
-    public event Action OnGameOver;
-    public event Action OnEnding;
+    public static event Action<Define.GameState> OnGameStateChangedAction;
     
-    void Start()
+    private void Start()
     {
         ChangeGameState(Define.GameState.InGame);
     }
@@ -49,20 +46,6 @@ public class GameManager : MonoBehaviour
 
     private void OnGameStateChanged()
     {
-        switch (CurrentGameState)
-        {
-            case Define.GameState.InGame:
-                OnInGameStart?.Invoke();
-                break;
-            case Define.GameState.GameOver:
-                OnGameOver?.Invoke();
-                break;
-            case Define.GameState.Ending:
-                OnEnding?.Invoke();
-                break;
-
-        }
-        
         OnGameStateChangedAction?.Invoke(CurrentGameState);
     }
 }

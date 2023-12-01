@@ -27,7 +27,7 @@ public class SpawningPool : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.Instance.OnGameStateChangedAction += OnGameStateChanged;
+        GameManager.OnGameStateChangedAction += OnGameStateChanged;
     }
 
     private void OnGameStateChanged(Define.GameState gameState)

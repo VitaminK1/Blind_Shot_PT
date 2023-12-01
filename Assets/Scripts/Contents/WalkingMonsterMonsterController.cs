@@ -3,26 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MonsterController : BaseController
+public class WalkingMonsterMonsterController : BaseMonsterController
 {
-
-	[SerializeField]
-	float _attackRange = 1;
-
-	public override void Init()
-	{
-		WorldObjectType = Define.WorldObject.Enemy;
-	}
-
-	protected override void UpdateIdle()
-	{
-		GameObject player = GameManager.Instance.Player;;
-		if (player == null)
-			return;
-		_lockTarget = player;
-		State = Define.State.Moving;
-		return;
-	}
+	[SerializeField] float _attackRange = 1;
+	[SerializeField] NavMeshAgent _nma;
 
 	protected override void UpdateMoving()
 	{
@@ -33,9 +17,8 @@ public class MonsterController : BaseController
 			float distance = (_destPos - transform.position).magnitude;
 			if (distance <= _attackRange)
 			{
-				NavMeshAgent nma = gameObject.GetOrAddComponent<NavMeshAgent>();
-				SetDestination(nma, transform.position);
-				State = Define.State.Attack;
+				SetDestination(transform.position);
+				enemyState = Define.EnemyState.Attack;
 				return;
 			}
 		}
@@ -45,12 +28,11 @@ public class MonsterController : BaseController
 		dir.y = 0;
 		if (dir.magnitude < 0.1f)
 		{
-			State = Define.State.Idle;
+			enemyState = Define.EnemyState.Idle;
 		}
 		else
 		{
-			NavMeshAgent nma = gameObject.GetOrAddComponent<NavMeshAgent>();
-			SetDestination(nma, _destPos);
+			SetDestination(_destPos);
 
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
 		}
@@ -74,7 +56,8 @@ public class MonsterController : BaseController
 		}
     }
 
-    private void SetDestination(NavMeshAgent nma, Vector3 destPos) {
-		nma.SetDestination(destPos);
+    private void SetDestination(Vector3 destPos) 
+    {
+	    _nma.SetDestination(destPos);
 	}
 }

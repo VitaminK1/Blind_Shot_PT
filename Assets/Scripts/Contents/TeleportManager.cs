@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class TeleportManager : MonoBehaviour
 {
-    [SerializeField] private GameObject m_Player;
     [SerializeField] private Transform m_InGamePlayerTransform;
     [SerializeField] private Transform m_GameOverPlayerTransform;
 
     private void Awake()
     {
-        GameManager.Instance.OnGameStateChangedAction += TeleportPlayer;
+        GameManager.OnGameStateChangedAction += TeleportPlayer;
     }
 
     private void TeleportPlayer(Define.GameState gameState)
@@ -28,9 +27,7 @@ public class TeleportManager : MonoBehaviour
 
     public void TeleportPlayer(Transform trans)
     {
-        if (!m_Player) return;
-
-        m_Player.transform.position = trans.position;
-        m_Player.transform.rotation = trans.rotation;
+        GameManager.Instance.Player.transform.position = trans.position;
+        GameManager.Instance.Player.transform.rotation = trans.rotation;
     }
 }
