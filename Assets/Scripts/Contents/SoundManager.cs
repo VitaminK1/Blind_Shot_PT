@@ -4,7 +4,7 @@ public class SoundManager : MonoBehaviour
 {
     [SerializeField] private AudioSource _bgmAudioSource;
     
-    AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
+    //AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
 
     private void Awake()
     {

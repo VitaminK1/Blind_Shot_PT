@@ -12,13 +12,14 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
     [SerializeField] private BaseMonsterController _flyingEnemy;
     [SerializeField] private BaseMonsterController _walkingEnemy;
 
+    [SerializeField] private Transform _parent;
     [SerializeField] float _spawnHeight = 0;
     [SerializeField] float _spawnTime = 5.0f;
 
-    private bool isSpawning = false;
+    //private bool isSpawning = false;
     private HashSet<BaseMonsterController> _monsters = new HashSet<BaseMonsterController>();
     private CancellationTokenSource _cancellationTokenSource;
-    private Vector3 _spawnPos;
+    //private Vector3 _spawnPos;
 
     protected override void Awake()
     {

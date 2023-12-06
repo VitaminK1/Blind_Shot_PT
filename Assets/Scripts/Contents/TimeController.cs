@@ -96,7 +96,7 @@ public class TimeController: MonoBehaviour
         {
             timeText.text = currentTime.ToString("HH:mm");
         }
-        if (currentTime.Hour > (int)sunriseHour)
+        if (currentTime.Hour > (int)sunriseHour && (int)sunsetHour > currentTime.Hour)
         {
             GameManager.Instance.ChangeGameState(Define.GameState.Ending);
         }

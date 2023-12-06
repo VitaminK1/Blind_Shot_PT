@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class WalkingMonsterController : BaseMonsterController
 {
-	[SerializeField] float _attackRange = 1;
+	[SerializeField] float _attackRange = 0.1f;
 	[SerializeField] NavMeshAgent _nma;
 
 	protected override void Init()
