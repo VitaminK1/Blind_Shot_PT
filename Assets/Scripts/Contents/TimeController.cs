@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using TMPro;
 
-public class TimeController: MonoBehaviour
+public class TimeController: Singleton<TimeController>
 {
     [SerializeField]
     private float timeMultiplier;
@@ -50,15 +50,15 @@ public class TimeController: MonoBehaviour
     private AnimationCurve fogDensityChangeCurve;
 
     private DateTime currentTime;
+    public DateTime CurrentTime => currentTime;
 
     private TimeSpan sunriseTime;
 
     private TimeSpan sunsetTime;
-
-    public static readonly WaitForSeconds m_waitForSecond10s = new WaitForSeconds(10f);
     
-    public void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         GameManager.OnGameStateChangedAction += OnGameStateChanged;
     }
 
@@ -96,7 +96,7 @@ public class TimeController: MonoBehaviour
         {
             timeText.text = currentTime.ToString("HH:mm");
         }
-        if (currentTime.Hour > (int)sunriseHour && (int)sunsetHour > currentTime.Hour)
+        if (CurrentTime.Hour > (int)sunriseHour && (int)sunsetHour > CurrentTime.Hour)
         {
             GameManager.Instance.ChangeGameState(Define.GameState.Ending);
         }

@@ -81,31 +81,12 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
         {
             EnemySettings currentWaveSettings = gameManager.EnemyWaveSettings[gameManager.CurrentWave];
 
-            List<BaseMonsterController> currentWaveMonsters = new List<BaseMonsterController>();
 
-            foreach (var enemyTypeCount in currentWaveSettings.EnemyTypeCounts)
-            {
-                Define.EnemyType enemyType = enemyTypeCount.Type;
-                int count = enemyTypeCount.Count;
+            BaseMonsterController monster = SpawnEnemy((Define.EnemyType)Random.Range(0, 2));
+            await UniTask.Delay(TimeSpan.FromSeconds(_spawnTime), cancellationToken: cancellationToken);
 
-                for (int i = 0; i < count; i++)
-                {
-                    cancellationToken.ThrowIfCancellationRequested();
-
-                    BaseMonsterController monster = SpawnEnemy(enemyType);
-                    currentWaveMonsters.Add(monster);
-
-                    await UniTask.Delay(TimeSpan.FromSeconds(_spawnTime), cancellationToken: cancellationToken);
-                }
-            }
-
-            await UniTask.WaitUntil(() => AllEnemiesDefeated(currentWaveMonsters), cancellationToken: cancellationToken);
             cancellationToken.ThrowIfCancellationRequested();
-
-            gameManager.ProceedWave();
         }
-        
-        gameManager.ChangeGameState(Define.GameState.Ending);
     }
 
     bool AllEnemiesDefeated(List<BaseMonsterController> enemies)
@@ -129,7 +110,7 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
         BaseMonsterController monster = InstantiateEnemy(enemyType, spawnPosition, spawnRotation);
         _monsters.Add(monster);
 
-        Debug.Log("spawned enemy");
+        //Debug.Log("spawned enemy");
         return monster;
     }
 

@@ -37,6 +37,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+
     public static event Action<Define.GameState> OnGameStateChangedAction;
     
     private void Start()
@@ -62,5 +63,9 @@ public class GameManager : Singleton<GameManager>
     private void OnGameStateChanged()
     {
         OnGameStateChangedAction?.Invoke(CurrentGameState);
+    }
+
+    public void GameStateToInGameState() {
+        ChangeGameState(Define.GameState.InGame);
     }
 }
