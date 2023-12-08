@@ -38,6 +38,7 @@ public class WalkingMonsterController : BaseMonsterController
 			}
 		}
 
+		SetDestination(_lockTarget.transform.position);
 		// 이동
 		Vector3 dir = _lockTarget.transform.position - transform.position;
 		dir.y = 0;

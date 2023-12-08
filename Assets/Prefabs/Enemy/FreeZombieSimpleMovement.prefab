@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: -8306363048744791612}
   m_Layer: 0
   m_Name: FreeZombieSimpleMovement
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -458,10 +458,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3bdc1ba97716f541a528fb2dcfcb8d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 0
+  _damage: 99
   _animator: {fileID: 95446636183784616}
   _enemyState: 0
-  _attackRange: 2
+  _attackRange: 1
   _nma: {fileID: -8306363048744791612}
   _rigidBody: {fileID: 54174046382449110}
 --- !u!195 &-8306363048744791612

@@ -2140,6 +2140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d5d8bfa4a7cc9747aca04bb87556b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Camera: {fileID: 2133805905}
   _DayColor: {r: 0.54509807, g: 0.6784314, b: 0.7647059, a: 0}
 --- !u!1001 &87250390092008131
 PrefabInstance:
@@ -2743,7 +2744,11 @@ PrefabInstance:
     - target: {fileID: 3661097017032794095, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
       propertyPath: _parent
       value: 
-      objectReference: {fileID: 8386027607344522508}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3661097017032794095, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
+      propertyPath: _flyingEnemy
+      value: 
+      objectReference: {fileID: -323678109150719116, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
     - target: {fileID: 4898080106511273502, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
       propertyPath: m_Name
       value: EnemySpawningPool
@@ -2777,11 +2782,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
---- !u!4 &8386027607344522508 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6110839542436430165, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
-  m_PrefabInstance: {fileID: 8386027607344522507}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
