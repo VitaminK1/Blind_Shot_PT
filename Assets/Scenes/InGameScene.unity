@@ -1831,6 +1831,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3661097017032794095, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
+      propertyPath: _walkingEnemy
+      value: 
+      objectReference: {fileID: -7355029021191284637, guid: 23f890fd03b5c3948bba0635ef3c6c46, type: 3}
     - target: {fileID: 4898080106511273502, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
       propertyPath: m_Name
       value: EnemySpawningPool

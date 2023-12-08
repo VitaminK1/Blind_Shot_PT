@@ -14,6 +14,7 @@ public class WalkingMonsterController : BaseMonsterController
 	{
 		if (!_animator) { gameObject.GetComponent<Animator>(); }
 		if (!_rigidBody) { gameObject.GetComponent<Animator>(); }
+		_animator.SetBool("Reset", true);
 	}
 
 
@@ -51,10 +52,22 @@ public class WalkingMonsterController : BaseMonsterController
 		}
 	}
 
+	protected override void UpdateDie()
+	{
+		_animator.SetBool("Dead", true);
+		Invoke("MonsterDisappear", 3f);
+	}
+
+	private void MonsterDisappear()
+	{
+		gameObject.SetActive(false);
+	}
+
 	protected override void UpdateAttack()
 	{
 		if (_lockTarget != null)
 		{
+			_animator.SetBool("Attack", true);
 			Vector3 dir = _lockTarget.transform.position - transform.position;
 			dir.y = 0;
 			Quaternion quat = Quaternion.LookRotation(dir);
