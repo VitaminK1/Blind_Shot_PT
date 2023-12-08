@@ -230,7 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4788319935855200}
   - component: {fileID: 111495423891279680}
-  - component: {fileID: 114489361866395698}
+  - component: {fileID: -3338621158797715337}
   m_Layer: 0
   m_Name: StoneMonster
   m_TagString: Untagged
@@ -275,7 +275,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114489361866395698
+--- !u!114 &-3338621158797715337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -284,9 +284,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1713781036754730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a8eeb9411d2d4e4180ec70be187c615, type: 3}
+  m_Script: {fileID: 11500000, guid: f5e6755c28c91ef4f88feeeeedc232f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 0
+  _animator: {fileID: 0}
+  _enemyState: 0
+  _attackRange: 3
+  _nma: {fileID: 0}
+  _rigidBody: {fileID: 0}
 --- !u!1 &1753159918419610
 GameObject:
   m_ObjectHideFlags: 0

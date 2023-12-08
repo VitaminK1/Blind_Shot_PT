@@ -125,7 +125,15 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
         Vector3 spawnPosition = GetRandomSpawnPosition();
         Quaternion spawnRotation = Quaternion.identity;
 
-        BaseMonsterController monster = InstantiateEnemy(enemyType, spawnPosition, spawnRotation);
+        BaseMonsterController monster = null;
+        if (spawnPosition.y > _spawnHeight)
+        {
+            monster = InstantiateEnemy(Define.EnemyType.Flying, spawnPosition, spawnRotation);
+        }
+        else
+        {
+            monster = InstantiateEnemy(Define.EnemyType.Walking, spawnPosition, spawnRotation);
+        }
         _monsters.Add(monster);
 
         Debug.Log("spawned enemy");

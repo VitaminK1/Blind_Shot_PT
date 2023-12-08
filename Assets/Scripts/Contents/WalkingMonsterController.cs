@@ -49,6 +49,7 @@ public class WalkingMonsterController : BaseMonsterController
 		{
 			_animator.SetFloat("MoveSpeed", dir.magnitude);
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
+			
 		}
 	}
 

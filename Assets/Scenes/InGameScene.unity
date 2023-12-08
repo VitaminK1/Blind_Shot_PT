@@ -1791,6 +1791,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 708854909251676241, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 819878380728284036, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2531592796292293806, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1831,10 +1839,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3021309348416422258, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3661097017032794095, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
-      propertyPath: _walkingEnemy
+      propertyPath: _flyingEnemy
       value: 
-      objectReference: {fileID: -7355029021191284637, guid: 23f890fd03b5c3948bba0635ef3c6c46, type: 3}
+      objectReference: {fileID: -323678109150719116, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
+    - target: {fileID: 4488554386356558191, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4898080106511273502, guid: 6fc9e0c5a351ecc4cbf89ea12cd9142d, type: 3}
       propertyPath: m_Name
       value: EnemySpawningPool
