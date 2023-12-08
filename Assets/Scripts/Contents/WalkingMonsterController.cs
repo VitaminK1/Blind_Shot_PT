@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,15 @@ public class WalkingMonsterController : BaseMonsterController
 {
 	[SerializeField] float _attackRange = 0.1f;
 	[SerializeField] NavMeshAgent _nma;
+	[SerializeField] private Rigidbody _rigidBody = null;
+
+	private void Awake()
+	{
+		if (!_animator) { gameObject.GetComponent<Animator>(); }
+		if (!_rigidBody) { gameObject.GetComponent<Animator>(); }
+		_animator.SetBool("Reset", true);
+	}
+
 
 	protected override void Init()
 	{
@@ -37,15 +47,28 @@ public class WalkingMonsterController : BaseMonsterController
 		}
 		else
 		{
-
+			_animator.SetFloat("MoveSpeed", dir.magnitude);
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
+			
 		}
+	}
+
+	protected override void UpdateDie()
+	{
+		_animator.SetBool("Dead", true);
+		Invoke("MonsterDisappear", 3f);
+	}
+
+	private void MonsterDisappear()
+	{
+		gameObject.SetActive(false);
 	}
 
 	protected override void UpdateAttack()
 	{
 		if (_lockTarget != null)
 		{
+			_animator.SetBool("Attack", true);
 			Vector3 dir = _lockTarget.transform.position - transform.position;
 			dir.y = 0;
 			Quaternion quat = Quaternion.LookRotation(dir);
