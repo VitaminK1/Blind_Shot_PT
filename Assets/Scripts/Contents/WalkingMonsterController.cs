@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,14 @@ public class WalkingMonsterController : BaseMonsterController
 {
 	[SerializeField] float _attackRange = 1;
 	[SerializeField] NavMeshAgent _nma;
+	[SerializeField] private Rigidbody _rigidBody = null;
+
+	private void Awake()
+	{
+		if (!_animator) { gameObject.GetComponent<Animator>(); }
+		if (!_rigidBody) { gameObject.GetComponent<Animator>(); }
+	}
+
 
 	protected override void Init()
 	{
@@ -37,7 +46,7 @@ public class WalkingMonsterController : BaseMonsterController
 		}
 		else
 		{
-
+			_animator.SetFloat("MoveSpeed", dir.magnitude);
 			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
 		}
 	}
