@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -54,15 +55,17 @@ public class WalkingMonsterController : BaseMonsterController
 		}
 	}
 
-	protected override void UpdateDie()
+	protected override async void UpdateDie()
 	{
-		_animator.SetBool("Dead", true);
-		Invoke("MonsterDisappear", 3f);
+		_animator.SetBool("die", true);
+		await UniTask.Delay(TimeSpan.FromSeconds(3));
+		MonsterDisappear();
 	}
 
 	private void MonsterDisappear()
 	{
-		gameObject.SetActive(false);
+		UniTask.SwitchToMainThread();
+		Destroy(this.gameObject);
 	}
 
 	protected override void UpdateAttack()
@@ -81,4 +84,5 @@ public class WalkingMonsterController : BaseMonsterController
     {
 	    _nma.SetDestination(destPos);
 	}
+
 }

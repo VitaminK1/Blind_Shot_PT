@@ -5,6 +5,7 @@ public class TeleportManager : MonoBehaviour
     [SerializeField] private Transform _inGamePlayerTransform;
     [SerializeField] private Transform _WeaponTransform;
     [SerializeField] private Transform _gameOverPlayerTransform;
+    [SerializeField] private Transform _gameEndingTransform;
 
     private void Awake()
     {
@@ -21,6 +22,10 @@ public class TeleportManager : MonoBehaviour
                 break;
             case Define.GameState.GameOver:
                 TeleportPlayer(_gameOverPlayerTransform);
+                TeleportWeapon(_WeaponTransform);
+                break;
+            case Define.GameState.Ending:
+                TeleportPlayer(_gameEndingTransform);
                 TeleportWeapon(_WeaponTransform);
                 break;
         }

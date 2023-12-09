@@ -16,10 +16,8 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
     [SerializeField] float _spawnHeight = 0;
     [SerializeField] float _spawnTime = 5.0f;
 
-    //private bool isSpawning = false;
     private HashSet<BaseMonsterController> _monsters = new HashSet<BaseMonsterController>();
     private CancellationTokenSource _cancellationTokenSource;
-    //private Vector3 _spawnPos;
 
     protected override void Awake()
     {
@@ -82,7 +80,7 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
             EnemySettings currentWaveSettings = gameManager.EnemyWaveSettings[gameManager.CurrentWave];
 
 
-            BaseMonsterController monster = SpawnEnemy((Define.EnemyType)Random.Range(0, 2));
+            BaseMonsterController monster = SpawnEnemy((Define.EnemyType)Random.Range(0, 2), _parent);
             await UniTask.Delay(TimeSpan.FromSeconds(_spawnTime), cancellationToken: cancellationToken);
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -102,7 +100,7 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
         return true;
     }
 
-    BaseMonsterController SpawnEnemy(Define.EnemyType enemyType)
+    BaseMonsterController SpawnEnemy(Define.EnemyType enemyType, Transform parent)
     {
         Vector3 spawnPosition = GetRandomSpawnPosition();
         Quaternion spawnRotation = Quaternion.identity;
@@ -110,11 +108,11 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
         BaseMonsterController monster = null;
         if (spawnPosition.y > _spawnHeight)
         {
-            monster = InstantiateEnemy(Define.EnemyType.Flying, spawnPosition, spawnRotation);
+            monster = InstantiateEnemy(Define.EnemyType.Flying, spawnPosition, spawnRotation, parent);
         }
         else
         {
-            monster = InstantiateEnemy(Define.EnemyType.Walking, spawnPosition, spawnRotation);
+            monster = InstantiateEnemy(Define.EnemyType.Walking, spawnPosition, spawnRotation, parent);
         }
         _monsters.Add(monster);
 
@@ -143,6 +141,19 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
                 return Instantiate(_flyingEnemy, position, rotation);
             case Define.EnemyType.Walking:
                 return Instantiate(_walkingEnemy, position, rotation);
+            default:
+                return null;
+        }
+    }
+
+    BaseMonsterController InstantiateEnemy(Define.EnemyType enemyType, Vector3 position, Quaternion rotation, Transform parent)
+    {
+        switch (enemyType)
+        {
+            case Define.EnemyType.Flying:
+                return Instantiate(_flyingEnemy, position, rotation, parent);
+            case Define.EnemyType.Walking:
+                return Instantiate(_walkingEnemy, position, rotation, parent);
             default:
                 return null;
         }
