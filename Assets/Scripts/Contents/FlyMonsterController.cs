@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +11,8 @@ public class FlyMonsterController : BaseMonsterController
     [SerializeField] float _attackRange = 1;
     [SerializeField] private Rigidbody _rigidBody = null;
     [SerializeField] private float speed = 5;
+
+
     private void Awake()
     {
         if (!_animator) { gameObject.GetComponent<Animator>(); }
@@ -48,7 +51,7 @@ public class FlyMonsterController : BaseMonsterController
     	protected override async void UpdateDie()
     	{
 	        _animator.SetBool("die", true);
-            await UniTask.Delay(TimeSpan.FromSeconds(3));
+            await UniTask.Delay(TimeSpan.FromSeconds(3f));
 
             MonsterDisappear();
         }

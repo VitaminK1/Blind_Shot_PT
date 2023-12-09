@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 
 public abstract class BaseMonsterController : MonoBehaviour
@@ -10,7 +11,6 @@ public abstract class BaseMonsterController : MonoBehaviour
 	protected readonly int _movingId = Animator.StringToHash("Moving");
 	protected readonly int _attackId = Animator.StringToHash("Attack");
 	protected readonly int _dieId = Animator.StringToHash("Die");
-
 	public Define.EnemyState enemyState
 	{
 		get { return _enemyState; }
@@ -65,6 +65,7 @@ public abstract class BaseMonsterController : MonoBehaviour
 		switch (newState)
 		{
 			case Define.EnemyState.Die:
+
 				//_animator.SetBool(_dieId, true);
 				break;
 			case Define.EnemyState.Moving:
