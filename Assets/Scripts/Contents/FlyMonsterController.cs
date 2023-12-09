@@ -8,10 +8,13 @@ public class FlyMonsterController : BaseMonsterController
     [SerializeField] float _attackRange = 1;
     [SerializeField] private Rigidbody _rigidBody = null;
     [SerializeField] private float speed = 5;
+    [SerializeField] private AudioSource _movingSound = null;
     private void Awake()
     {
         if (!_animator) { gameObject.GetComponent<Animator>(); }
         if (!_rigidBody) { gameObject.GetComponent<Rigidbody2D>(); }
+        _movingSound = GetComponent<AudioSource>();
+        _movingSound.Play();
     }
 
     protected override void UpdateMoving()
