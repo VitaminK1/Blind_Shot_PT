@@ -14,7 +14,8 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
 
     [SerializeField] private Transform _parent;
     [SerializeField] float _spawnHeight = 0;
-    [SerializeField] float _spawnTime = 5.0f;
+    [SerializeField] float _spawnTime = 20.0f;
+    [SerializeField] AnimationCurve _spawnTimeCurve;
 
     private HashSet<BaseMonsterController> _monsters = new HashSet<BaseMonsterController>();
     private CancellationTokenSource _cancellationTokenSource;
@@ -59,6 +60,7 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
         }
 
         _cancellationTokenSource = new CancellationTokenSource();
+
         SpawnWave(_cancellationTokenSource.Token).Forget();
     }
 
@@ -83,6 +85,7 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
     async UniTaskVoid SpawnWave(CancellationToken cancellationToken)
     {
         GameManager gameManager = GameManager.Instance;
+        await UniTask.Delay(TimeSpan.FromSeconds(_spawnTime), cancellationToken: cancellationToken);
 
         while (gameManager.CurrentWave < gameManager.EnemyWaveSettings.Count)
         {
@@ -90,6 +93,7 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
 
 
             BaseMonsterController monster = SpawnEnemy((Define.EnemyType)Random.Range(0, 2), _parent);
+            _spawnTime = _spawnTimeCurve.Evaluate((TimeController.Instance.CurrentTime.Hour + 3) % 24);
             await UniTask.Delay(TimeSpan.FromSeconds(_spawnTime), cancellationToken: cancellationToken);
 
             cancellationToken.ThrowIfCancellationRequested();
