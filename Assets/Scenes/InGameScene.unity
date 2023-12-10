@@ -755,6 +755,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4203334374262101827, guid: 71a7b3e3242e65b4185dceffa1e5c855, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6052621454607754607, guid: 71a7b3e3242e65b4185dceffa1e5c855, type: 3}
       propertyPath: m_Name
       value: EnemySpawningPool
@@ -1488,7 +1492,7 @@ PrefabInstance:
         Press Trigger button to attack
         monsters coming.
 
-        Survive until the sun rises at 8 AM.'
+        Survive until the sun rises at 9 AM.'
       objectReference: {fileID: 0}
     - target: {fileID: 80902670133209287, guid: f63358377f3815444b4c33b7cbd427d7, type: 3}
       propertyPath: m_VerticalAlignment
@@ -1608,6 +1612,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1221225155 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1901557449815594793, guid: 411af79a87604204fa86ef2cd8762494, type: 3}
+  m_PrefabInstance: {fileID: 5163127273119709764}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1403010013
 GameObject:
   m_ObjectHideFlags: 0
@@ -3185,6 +3194,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7449722188927083192, guid: 411af79a87604204fa86ef2cd8762494, type: 3}
+      propertyPath: _gameEndingTransform
+      value: 
+      objectReference: {fileID: 1221225155}
     - target: {fileID: 9157061289242774427, guid: 411af79a87604204fa86ef2cd8762494, type: 3}
       propertyPath: m_Name
       value: TeleportManager

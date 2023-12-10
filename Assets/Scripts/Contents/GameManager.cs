@@ -31,7 +31,9 @@ public class GameManager : Singleton<GameManager>
         set
         {
             if (_currentGameState == value) return;
-            
+            if (value == Define.GameState.Ending) {
+                Application.Quit();
+            }
             _currentGameState = value;
             OnGameStateChanged();
         }
@@ -50,10 +52,6 @@ public class GameManager : Singleton<GameManager>
         if (gameState == Define.GameState.InGame)
         {
             _currentWave = 0;
-        }
-        if (gameState == Define.GameState.Ending)
-        {
-            Application.Quit();
         }
 
         CurrentGameState = gameState;
