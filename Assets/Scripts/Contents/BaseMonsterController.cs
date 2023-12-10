@@ -65,8 +65,6 @@ public abstract class BaseMonsterController : MonoBehaviour
 		switch (newState)
 		{
 			case Define.EnemyState.Die:
-
-				//_animator.SetBool(_dieId, true);
 				break;
 			case Define.EnemyState.Moving:
 				//_animator.SetBool(_movingId, true);
@@ -89,7 +87,7 @@ public abstract class BaseMonsterController : MonoBehaviour
 
 	public void Despawn()
 	{
-		
+		Destroy(this.gameObject);
 	}
 
 	protected void OnDestroy()

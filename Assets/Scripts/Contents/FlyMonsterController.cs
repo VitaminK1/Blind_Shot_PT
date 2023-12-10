@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -46,17 +48,12 @@ public class FlyMonsterController : BaseMonsterController
     		}
     	}
     
-    	protected override void UpdateDie()
+    	protected override async void UpdateDie()
     	{
 	        _animator.SetBool("die", true);
-    		Invoke("MonsterDisappear", 3f);
-    	}
-    
-    	private void MonsterDisappear()
-    	{
-    		gameObject.SetActive(false);
-    	}
-	
+            await UniTask.Delay(TimeSpan.FromSeconds(3));
+            Despawn();
+        }
     
     	protected override void UpdateAttack()
     	{

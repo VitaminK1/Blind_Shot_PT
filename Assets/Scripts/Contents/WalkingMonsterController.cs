@@ -59,14 +59,8 @@ public class WalkingMonsterController : BaseMonsterController
 	{
 		_animator.SetBool("die", true);
 		await UniTask.Delay(TimeSpan.FromSeconds(3));
-		MonsterDisappear();
-	}
-
-	private void MonsterDisappear()
-	{
-		UniTask.SwitchToMainThread();
-		Destroy(this.gameObject);
-	}
+		Despawn();
+    }
 
 	protected override void UpdateAttack()
 	{

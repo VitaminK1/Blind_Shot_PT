@@ -51,7 +51,11 @@ public class GameManager : Singleton<GameManager>
         {
             _currentWave = 0;
         }
-        
+        if (gameState == Define.GameState.Ending)
+        {
+            Application.Quit();
+        }
+
         CurrentGameState = gameState;
     }
     
