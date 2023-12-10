@@ -84,7 +84,7 @@ public class TimeController: Singleton<TimeController>
         if (newGameState == Define.GameState.InGame)
         {
             InitializeTime();
-            GameManager.OnGameStateChangedAction -= OnGameStateChanged;
+            //GameManager.OnGameStateChangedAction -= OnGameStateChanged;
         }
     }
 

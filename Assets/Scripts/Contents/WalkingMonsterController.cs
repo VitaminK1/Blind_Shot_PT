@@ -55,10 +55,8 @@ public class WalkingMonsterController : BaseMonsterController
 		}
 	}
 
-	protected override async void UpdateDie()
+	protected override void UpdateDie()
 	{
-		_animator.SetBool("die", true);
-		await UniTask.Delay(TimeSpan.FromSeconds(3));
 		Despawn();
     }
 
