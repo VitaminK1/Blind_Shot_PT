@@ -68,7 +68,16 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
         {
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource = null;
+            foreach (var monster in _monsters)
+            {
+                if (monster != null)
+                {
+                    Destroy(monster.gameObject);
+                }
+            }
+            _monsters.Clear();
         }
+
     }
 
     async UniTaskVoid SpawnWave(CancellationToken cancellationToken)
@@ -148,11 +157,28 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
 
     BaseMonsterController InstantiateEnemy(Define.EnemyType enemyType, Vector3 position, Quaternion rotation, Transform parent)
     {
+
         switch (enemyType)
         {
             case Define.EnemyType.Flying:
+                
                 return Instantiate(_flyingEnemy, position, rotation, parent);
             case Define.EnemyType.Walking:
+                if (_walkingEnemy == null)
+                {
+                    Debug.Log("null enemy");
+                }
+                else if (rotation == null)
+                {
+                    Debug.Log("null rot");
+                }
+                else if (position == null)
+                {
+                    Debug.Log("null pos");
+                }
+                else if (parent == null) {
+                    Debug.Log("null parent");
+                }
                 return Instantiate(_walkingEnemy, position, rotation, parent);
             default:
                 return null;

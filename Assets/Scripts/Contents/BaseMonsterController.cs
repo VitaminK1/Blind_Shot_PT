@@ -77,11 +77,13 @@ public abstract class BaseMonsterController : MonoBehaviour
 
 	public void AttackPlayer()
 	{
+		Debug.Log("player dmged");
 		Player.Instance.Hit(_damage);
 	}
 
 	public void AttackedByPlayer()
 	{
+		Debug.Log("monster died");
 		ChangeEnemyState(Define.EnemyState.Die);
 	}
 

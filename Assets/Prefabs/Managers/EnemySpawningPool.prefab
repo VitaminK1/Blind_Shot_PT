@@ -95,7 +95,7 @@ MonoBehaviour:
   - {fileID: 6073999411270177101}
   - {fileID: 1832537542576898238}
   _flyingEnemy: {fileID: -323678109150719116, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
-  _walkingEnemy: {fileID: -7355029021191284637, guid: 23f890fd03b5c3948bba0635ef3c6c46, type: 3}
+  _walkingEnemy: {fileID: -7355029021191284637, guid: b128ae6939083f041af3a2d9095a0652, type: 3}
   _parent: {fileID: 6135535357108785906}
   _spawnHeight: 0
   _spawnTime: 10

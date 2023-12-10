@@ -702,6 +702,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySpawningPool
       objectReference: {fileID: 0}
+    - target: {fileID: 8162214576786253683, guid: 71a7b3e3242e65b4185dceffa1e5c855, type: 3}
+      propertyPath: _spawnTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8162214576786253683, guid: 71a7b3e3242e65b4185dceffa1e5c855, type: 3}
+      propertyPath: _walkingEnemy
+      value: 
+      objectReference: {fileID: -7355029021191284637, guid: b128ae6939083f041af3a2d9095a0652, type: 3}
     - target: {fileID: 8976285361584618662, guid: 71a7b3e3242e65b4185dceffa1e5c855, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1634,63 +1642,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678032270}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &1919186864
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1433355900633108, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
-      propertyPath: m_Name
-      value: eyebat
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107771985693238, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107771985693238, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107771985693238, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107771985693238, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.2397767
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107771985693238, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107771985693238, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.9708281
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107771985693238, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107771985693238, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107771985693238, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 207.747
-      objectReference: {fileID: 0}
-    - target: {fileID: 4107771985693238, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7f6256d759e4da84c834094f93c80dfe, type: 3}
 --- !u!1 &1934541185
 GameObject:
   m_ObjectHideFlags: 0
@@ -2462,6 +2413,7 @@ GameObject:
   - component: {fileID: 429275981975330155}
   - component: {fileID: 2455006548459514275}
   - component: {fileID: 2455006548459514274}
+  - component: {fileID: 2455006548459514276}
   m_Layer: 0
   m_Name: Table
   m_TagString: obstacle
@@ -2526,6 +2478,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!208 &2455006548459514276
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2230940201315777726}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.25, y: 0.5, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!65 &2464002037862235944
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2626,6 +2594,7 @@ GameObject:
   - component: {fileID: 2464002037866416616}
   - component: {fileID: 2464002037862235944}
   - component: {fileID: 2464002037868615465}
+  - component: {fileID: 2464002037868615466}
   m_Layer: 0
   m_Name: Streetlight
   m_TagString: obstacle
@@ -2660,6 +2629,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!208 &2464002037868615466
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464002037868615464}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.05, y: 6, z: 0.05}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 5.5, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!4 &3127728407535335505
 Transform:
   m_ObjectHideFlags: 0
@@ -2783,4 +2768,3 @@ SceneRoots:
   - {fileID: 2084827461}
   - {fileID: 1403010015}
   - {fileID: 1934541186}
-  - {fileID: 1919186864}
