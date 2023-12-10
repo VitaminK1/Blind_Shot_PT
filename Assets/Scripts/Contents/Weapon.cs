@@ -13,6 +13,8 @@ public class Weapon : Singleton<Weapon>
     private float _activeDuration = 0.5f; // time to be active after use
     [SerializeField]
     private GameObject _go; // glass object for activating colliders
+    [SerializeField]
+    private AudioSource _audioSource; // audio source for shooting sound
 
     private CancellationTokenSource _shootCts;
 
@@ -21,6 +23,7 @@ public class Weapon : Singleton<Weapon>
         base.Awake();
         _shootCts = new CancellationTokenSource();
         GameManager.OnGameStateChangedAction += OnGameStateChanged;
+        _audioSource = GetComponent<AudioSource>();
     }
     private void OnGameStateChanged(Define.GameState gameState)
     {
@@ -42,6 +45,7 @@ public class Weapon : Singleton<Weapon>
 
     async UniTaskVoid Shoot(CancellationToken cancellationToken)
     {
+        _audioSource.Play();
         try
         {
             cancellationToken.ThrowIfCancellationRequested();
