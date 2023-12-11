@@ -16,12 +16,16 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
     [SerializeField] float _spawnHeight = 0;
     [SerializeField] float _spawnTime = 20.0f;
     [SerializeField] AnimationCurve _spawnTimeCurve;
+    private int[] sequence;
+    private int _spawnIndex;
 
     private HashSet<BaseMonsterController> _monsters = new HashSet<BaseMonsterController>();
     private CancellationTokenSource _cancellationTokenSource;
 
     protected override void Awake()
     {
+        sequence = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, };
+        _spawnIndex = 0;
         base.Awake();
         GameManager.OnGameStateChangedAction += OnGameStateChanged;
     }
@@ -141,6 +145,7 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
         }
         else
         {
+            // Transform spawnPoint = _spawnPoint[_sequence[_spwanIndex++]];
             Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length - 1)];
             return spawnPoint.position + new Vector3(0, _spawnHeight, 0);
         }
